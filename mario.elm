@@ -90,7 +90,7 @@ view (w',h') mario =
 
     verb =
       if  | mario.y  >  0 -> "jump"  
-          | mario.vx /= 0 -> "walk"
+          | mario.vx /= 0 || mario.vz /= 0 -> "walk"
           | otherwise     -> "stand"
 
     dir =
