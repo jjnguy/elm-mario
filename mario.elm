@@ -89,7 +89,7 @@ view (w',h') mario =
     (w,h) = (toFloat w', toFloat h')
 
     verb =
-      if  | mario.y  >  0 -> "jump"  
+      if  | mario.y  >  0 -> "jump"
           | mario.vx /= 0 || mario.vz /= 0 -> "walk"
           | otherwise     -> "stand"
 
@@ -99,7 +99,7 @@ view (w',h') mario =
         Right -> "right"
 
     src =
-      "/imgs/mario/"++ verb ++ "/" ++ dir ++ ".gif"
+      "imgs/mario/"++ verb ++ "/" ++ dir ++ ".gif"
 
     marioImage =
       image 35 35 src
@@ -127,13 +127,9 @@ main : Signal Element
 main =
   Signal.map2 view Window.dimensions (Signal.foldp update mario input)
 
-tuppler : Float -> Keys -> Keys -> (Float, Keys, Keys)
-tuppler flt key1 key2 =
-  (flt, key1, key2)
-
 input : Signal (Float, Keys, Keys)
 input =
   let
     delta = Signal.map (\t -> t/20) (fps 30)
   in
-    Signal.sampleOn delta (Signal.map3 tuppler delta Keyboard.arrows Keyboard.wasd)
+    Signal.sampleOn delta (Signal.map3 (,,) delta Keyboard.arrows Keyboard.wasd)

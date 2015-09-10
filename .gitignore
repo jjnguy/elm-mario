@@ -1,0 +1,9 @@
+elm.js
+mario.html
+elm-stuff/exact-dependencies.json
+elm-package.json
+*.elmi
+*.elmo
+*.yml
+*.md
+elm-stuff/packages/elm-lang/core/2.1.0/**
