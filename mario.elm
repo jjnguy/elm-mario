@@ -83,6 +83,11 @@ walk arrow wasd mario =
 
 -- VIEW
 
+scaleMario : Model -> Float -> (Float, Float) -> Form -> Form
+scaleMario mario groundY position img  =
+  img
+    |> scale 1
+
 view : (Int, Int) -> Model -> Element
 view (w',h') mario =
   let
@@ -113,11 +118,12 @@ view (w',h') mario =
       [ rect w h
           |> filled (rgb 174 238 238)
       , rect w 100
-          |> filled (rgb 74 167 43)
+          |> filled (rgb 74 167 40)
           |> move (0, 24 - h/2)
       , marioImage
           |> toForm
           |> move position
+          |> scaleMario mario groundY position
       ]
 
 
